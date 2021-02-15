@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Bezoui Dictionary",
+  "description": "The smartest and easiest way to search the meaning of a word.",
+  "version": "0.1",
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",  
+    "storage"
+  ],
+  "icons": {"32": "media/icon.png", "128": "media/icon128x128.png"},
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["scripts/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "media/icon.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Search Definition"
+  }
+}

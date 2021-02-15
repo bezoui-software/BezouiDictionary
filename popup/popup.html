@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  </head>
+  <style>
+
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: white;
+      color: black;
+      width: 500px;
+      height: 500px;
+      user-select: none; 
+    }
+
+    .word-type {
+      font-size: 13px;
+      font-weight: 300;
+      color: black;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    #title {
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: 2px;
+      color: blue;
+    }
+
+    .dark-mode {
+      background: black;
+      color: white;
+    }
+
+    .dark-mode .word-type {
+      color: white;
+    }
+
+    .dark-mode #title {
+      color: #3dbae2;
+    }
+  </style>
+  <body>
+    <div id='title'>Bezoui Dictionary</div>
+    <script src='popup.js'></script>
+  </body>
+</html>
