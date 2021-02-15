@@ -11,11 +11,18 @@ function sendMessage(msg) {
   }
 }
 
+const settings = {
+                   'dark-mode': function(state) {
+                                  if (state) {
+                                    document.body.classList.add('dark-mode');
+                                  }
+                                }
+                 }
+
 async function applySettings() {
   await getItem('dark-mode', data => {
-    const darkMode = data['dark-mode'];
-    if (darkMode) {
-      document.body.classList.add('dark-mode');
+    if (settings['dark-mode']) {
+      settings['dark-mode'](data['dark-mode']);
     }
   });
 
