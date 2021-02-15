@@ -8,43 +8,39 @@
     document.body.appendChild(settingsContainer);
 
     for (let settingKey of Object.keys(settings)) {
-      settings[settingKey].elt = document.createElement('div');
-      settings[settingKey].elt.id = `${settingKey}-container`;
-      settings[settingKey].elt.classList.add('setting');
-      settingsContainer.appendChild(settings[settingKey].elt);
+      getItem(settingKey, function(savedSetting) {
+        savedSetting = savedSetting[settingKey];
 
-      const label = document.createElement('label');
-      label.innerHTML = settings[settingKey].name;
-      label.classList.add('setting-name');
-      settings[settingKey].elt.appendChild(label);
+        settings[settingKey].elt = document.createElement('div');
+        settings[settingKey].elt.id = `${settingKey}-container`;
+        settings[settingKey].elt.classList.add('setting');
+        settingsContainer.appendChild(settings[settingKey].elt);
 
-      const toogle = createSwitch();
-      settings[settingKey].elt.appendChild(toogle);
+        const label = document.createElement('label');
+        label.innerHTML = settings[settingKey].name;
+        label.classList.add('setting-name');
+        settings[settingKey].elt.appendChild(label);
+
+        const toogle = createSwitch(savedSetting);
+        toogle.firstChild.onchange = saveChanges;
+        settings[settingKey].elt.appendChild(toogle);
+      })
     }
-
-    const saveChangeButton = document.createElement('button');
-    saveChangeButton.innerHTML = 'SAVE';
-    saveChangeButton.id = 'save-changes-button';
-    settingsContainer.appendChild(saveChangeButton);
   }
 
-  function setupEvents() {
-    function saveChanges() {
-      for (let settingKey of Object.keys(settings)) {
-        const setting = settings[settingKey];  
-        const settingState = setting.elt.lastChild.firstChild.checked;     
+  function saveChanges() {
+    for (let settingKey of Object.keys(settings)) {
+      const setting = settings[settingKey];  
+      const settingState = setting.elt.lastChild.firstChild.checked;     
  
-        function changedSaved(data) {
-          console.log('SAVED !');
-        }
-
-        const item = {};
-        item[settingKey] = settingState;
-        setItem(item, changedSaved);
+      function changedSaved(data) {
+        console.log('SAVED !');
       }
-    }
 
-    document.getElementById('save-changes-button').addEventListener('click', saveChanges);
+      const item = {};
+      item[settingKey] = settingState;
+      setItem(item, changedSaved);
+    }
   }
 
   function setItem(data, callback) {
@@ -57,6 +53,5 @@
 
   window.onload = function () {
     setupSettings();
-    setupEvents();
   }
 }())
